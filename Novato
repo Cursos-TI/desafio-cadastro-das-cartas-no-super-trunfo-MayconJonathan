@@ -1,0 +1,46 @@
+#include <stdio.h>
+int main (){
+    char Estado_A[20], Cdc_A[5], cidadeA[20];
+    char Estado_B[20], Cdc_B[5], cidadeB[20];
+    int POP_A, PT_A, POP_B, PT_B;
+    float AREA_A, PIB_A, AREA_B, PIB_B;
+
+    printf("Atençao, digite a seguir os dados referentes a primeira carta (Use _ para espaçar os nomes) \n");
+    printf("Digite o nome do estado: ");
+    scanf("%s", Estado_A);
+    printf("Digite o codigo da carta: ");
+    scanf("%s", Cdc_A);
+    printf("Digite o nome da cidade: ");
+    scanf("%s", cidadeA);
+    printf("Digite o numero de habitantes da cidade (nao use pontos): ");
+    scanf("%d", &POP_A);
+    printf("Digite a area da cidade em km² (nao use pontos): ");
+    scanf("%f", &AREA_A);
+    printf("Digite o PIB da cidade (nao use pontos apenas numeros): ");
+    scanf("%f", &PIB_A);
+    printf("Digite a quantidade pontos turisticos da cidade: ");
+    scanf("%d", &PT_A);
+
+
+    printf("Atençao, digite a seguir os dados referentes a segunda carta (Use _ para espaçar os nomes) \n");
+    printf("Digite o nome do estado: ");
+    scanf("%s", Estado_B);
+    printf("Digite o codigo da carta: ");
+    scanf("%s", Cdc_B);
+    printf("Digite o nome da cidade: ");
+    scanf("%s", cidadeB);
+    printf("Digite o numero de habitantes da cidade (nao use pontos): ");
+    scanf("%d", &POP_B);
+    printf("Digite a area da cidade em km²(nao use pontos): ");
+    scanf("%f", &AREA_B);
+    printf("Digite o PIB da cidade(nao use pontos apenas numeros): ");
+    scanf("%f", &PIB_B);
+    printf("Digite a quantidade pontos turisticos da cidade: ");
+    scanf("%d", &PT_B);
+
+
+
+    return 0;
+}
+
+
