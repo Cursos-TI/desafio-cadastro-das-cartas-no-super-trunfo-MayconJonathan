@@ -1,94 +1,106 @@
-//CRIAR UM MENU COM OPÇOES  ADD CARTA 1, ADD CARTA 2, Exibir dados das cartas
 #include <stdio.h>
+
+// Definição da estrutura para armazenar os dados da carta
+typedef struct {
+    char estado[20];
+    char codigo[5];
+    char cidade[20];
+    unsigned long int populacao;
+    float area;
+    float pib;
+    int pontosTuristicos;
+    float densidade;
+    float pibPerCapita;
+    float superPoder;
+} Carta;
+
+// Função para cadastrar os dados da carta
+void cadastrarCarta(Carta *carta, int numero) {
+    printf("\n--- Cadastro da Carta %d ---\n", numero);
+    printf("Digite o nome do estado: ");
+    scanf("%s", carta->estado);
+    printf("Digite o codigo da carta: ");
+    scanf("%s", carta->codigo);
+    printf("Digite o nome da cidade: ");
+    scanf("%s", carta->cidade);
+    printf("Digite o numero de habitantes da cidade: ");
+    scanf("%lu", &carta->populacao);
+    printf("Digite a area da cidade em km²: ");
+    scanf("%f", &carta->area);
+    printf("Digite o PIB da cidade: ");
+    scanf("%f", &carta->pib);
+    printf("Digite a quantidade de pontos turisticos da cidade: ");
+    scanf("%d", &carta->pontosTuristicos);
+
+    // Cálculos automáticos
+    carta->densidade = carta->populacao / carta->area;
+    carta->pibPerCapita = carta->pib / carta->populacao;
+    carta->superPoder = carta->populacao + carta->area + carta->pib +
+                        carta->pontosTuristicos + carta->pibPerCapita +
+                        (1.0f / carta->densidade); // inverso da densidade
+}
+
+// Função para exibir os dados de uma carta
+void exibirCarta(Carta carta, int numero) {
+    printf("\n--- Dados da Carta %d ---\n", numero);
+    printf("Estado: %s\n", carta.estado);
+    printf("Codigo: %s\n", carta.codigo);
+    printf("Cidade: %s\n", carta.cidade);
+    printf("Populacao: %lu\n", carta.populacao);
+    printf("Area: %.2f km²\n", carta.area);
+    printf("PIB: %.2f\n", carta.pib);
+    printf("Pontos Turisticos: %d\n", carta.pontosTuristicos);
+    printf("Densidade Populacional: %.2f hab/km²\n", carta.densidade);
+    printf("PIB per Capita: %.2f\n", carta.pibPerCapita);
+    printf("Super Poder: %.2f\n", carta.superPoder);
+}
+
+// Função para comparar duas cartas
+void compararCartas(Carta c1, Carta c2) {
+    printf("\n===== Comparacao de Cartas =====\n");
+
+    printf("Populacao: Carta 1 venceu (%d)\n", c1.populacao > c2.populacao);
+    printf("Area: Carta 1 venceu (%d)\n", c1.area > c2.area);
+    printf("PIB: Carta 1 venceu (%d)\n", c1.pib > c2.pib);
+    printf("Pontos Turisticos: Carta 1 venceu (%d)\n", c1.pontosTuristicos > c2.pontosTuristicos);
+    printf("Densidade Populacional: Carta 1 venceu (%d)\n", c1.densidade < c2.densidade); // menor vence
+    printf("PIB per Capita: Carta 1 venceu (%d)\n", c1.pibPerCapita > c2.pibPerCapita);
+    printf("Super Poder: Carta 1 venceu (%d)\n", c1.superPoder > c2.superPoder);
+}
+
 int main() {
+    Carta carta1, carta2;
     int opcao;
-    char Estado_A[20], Cdc_A[5], cidadeA[20];
-    char Estado_B[20], Cdc_B[5], cidadeB[20];
-    int POP_A, PT_A, POP_B, PT_B;
-    float AREA_A, PIB_A, AREA_B, PIB_B;
-    float DEN_A, PIBPC_A;
-    float DEN_B, PIBPC_B;
-menu:
-    printf("============MENU============\n");
-    printf("Selecione a opcao desejada\n");
-    
-    printf("1. Adicionar carta 1\n");
-    printf("2. Adicionar carta 2\n");
-    printf("3. Exibir dados das cartas\n");
-    scanf("%d", &opcao);
-    printf("\n");
 
-    //FUNÇÕES DE ENTRADA DE DADOS
-    switch (opcao){
-        case 1: 
-            printf("Atencao, digite a seguir os dados referentes a primeira carta (Use _ para espacar os nomes) \n");
-            printf("Digite o nome do estado: ");
-            scanf("%s", Estado_A);
-            printf("Digite o codigo da carta: ");
-            scanf("%s", Cdc_A);
-            printf("Digite o nome da cidade: ");
-            scanf("%s", cidadeA);
-            printf("Digite o numero de habitantes da cidade (nao use pontos): ");
-            scanf("%d", &POP_A);
-            printf("Digite a area da cidade em km² (nao use pontos): ");
-            scanf("%f", &AREA_A);
-            printf("Digite o PIB da cidade (nao use pontos apenas numeros): ");
-            scanf("%f", &PIB_A);
-            printf("Digite a quantidade pontos turisticos da cidade: ");
-            scanf("%d", &PT_A);
-            printf("\n");
-            goto menu;
-        case 2:
-            printf("Atencao, digite a seguir os dados referentes a segunda carta (Use _ para espacar os nomes) \n");
-            printf("Digite o nome do estado: ");
-            scanf("%s", Estado_B);
-            printf("Digite o codigo da carta: ");
-            scanf("%s", Cdc_B);
-            printf("Digite o nome da cidade: ");
-            scanf("%s", cidadeB);
-            printf("Digite o numero de habitantes da cidade (nao use pontos): ");
-            scanf("%d", &POP_B);
-            printf("Digite a area da cidade em km²(nao use pontos): ");
-            scanf("%f", &AREA_B);
-            printf("Digite o PIB da cidade(nao use pontos apenas numeros): ");
-            scanf("%f", &PIB_B);
-            printf("Digite a quantidade pontos turisticos da cidade: ");
-            scanf("%d", &PT_B);
-            printf("\n");
-            goto menu;
-        //FUNÇÃO DE EXIBIÇÃO DE DADOS COM CALCULO  
-        case 3:
-            printf("Dados da primeira carta: \n");
-            printf("Nome do Estado: %s\n", Estado_A);
-            printf("Codigo da carta: %s\n",Cdc_A);
-            printf("Nome da cidade: %s\n", cidadeA);
-            printf("Numero de habitantes: %d\n", POP_A);
-            printf("Area da cidade em Km²: %f\n", AREA_A);
-            printf("PIB da cidade: %f\n", PIB_A);
-            printf("Pontos Turisticos: %d\n", PT_A);
-            DEN_A = POP_A/AREA_A;
-            printf("Densidade Populacional: %f\n", DEN_A);
-            PIBPC_A = PIB_A/POP_A;
-            printf("PIB per Capita: %f\n", PIBPC_A);
-            printf("\n");
-            
-            //Dados Segunda carta
-            printf("\n");
-            printf("Dados da segunda carta: \n");
-            printf("Nome do Estado: %s\n", Estado_B);
-            printf("Codigo da carta: %s\n",Cdc_B);
-            printf("Nome da cidade: %s\n", cidadeB);
-            printf("Numero de habitantes: %d\n", POP_B);
-            printf("Area da cidade em Km²: %f\n", AREA_B);
-            printf("PIB da cidade: %f\n", PIB_B);
-            printf("Pontos Turisticos: %d\n", PT_B);
-            DEN_B = POP_B/AREA_B;
-            printf("Densidade Populacional: %f\n", DEN_B);
-            PIBPC_B = PIB_B/POP_B;
-            printf("PIB per Capita: %f\n", PIBPC_B);
-            printf("\n");
-            goto menu;
+    while (1) {
+        printf("\n============ MENU ============\n");
+        printf("1. Adicionar Carta 1\n");
+        printf("2. Adicionar Carta 2\n");
+        printf("3. Exibir Dados das Cartas\n");
+        printf("4. Comparar Cartas\n");
+        printf("5. Sair\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
 
-            }
-
+        switch (opcao) {
+            case 1:
+                cadastrarCarta(&carta1, 1);
+                break;
+            case 2:
+                cadastrarCarta(&carta2, 2);
+                break;
+            case 3:
+                exibirCarta(carta1, 1);
+                exibirCarta(carta2, 2);
+                break;
+            case 4:
+                compararCartas(carta1, carta2);
+                break;
+            case 5:
+                printf("Encerrando o programa...\n");
+                return 0;
+            default:
+                printf("Opcao invalida!\n");
+        }
+    }
 }
